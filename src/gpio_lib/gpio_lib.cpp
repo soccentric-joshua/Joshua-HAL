@@ -5,7 +5,8 @@
  * @copyright (C) Soccentric LLC */
 
 #include "gpio_lib.h"
-#include "../platform_rpi5.h"
+#include "../platform_joshua_sitara.h"
+#include "../pru_icss_lib/pru_icss_lib.h"
 
 /**
  * @brief Constructor for GpioTesting
@@ -568,6 +569,19 @@ TestOutput GpioTesting::testGpioOutputSwitchingSpeed()
     bool success = true;
     std::vector<std::string> data;
 
+    joshua::pru::PruIcssManager pru(JOSHUA_SITARA_PRU_REMOTEPROC_ID);
+    std::string detail;
+    if (pru.isRunning()) {
+        std::string rpmsg;
+        if (pru.rpmsgRoundTrip("GPIO_TOGGLE_BENCH", &rpmsg, 100, &detail)) {
+            data.push_back("PRU deterministic toggle probe: " + rpmsg);
+        } else {
+            data.push_back("PRU RPMsg probe unavailable: " + detail);
+        }
+    } else {
+        data.push_back("PRU not running; using ARM timing fallback");
+    }
+
     // Test output switching speed
     int pin = 2;
     double speed = measureSwitchingSpeed(pin);
@@ -606,6 +620,19 @@ TestOutput GpioTesting::testGpioPwmOutput()
 {
     bool success = true;
     std::vector<std::string> data;
+
+    joshua::pru::PruIcssManager pru(JOSHUA_SITARA_PRU_REMOTEPROC_ID);
+    std::string detail;
+    if (pru.isRunning()) {
+        std::string rpmsg;
+        if (pru.rpmsgRoundTrip("PWM_SET 1000 50", &rpmsg, 100, &detail)) {
+            data.push_back("PRU PWM command response: " + rpmsg);
+        } else {
+            data.push_back("PRU PWM command failed: " + detail);
+        }
+    } else {
+        data.push_back("PRU not running; using software PWM fallback");
+    }
 
     // Test PWM output
     int pin = 3;
@@ -1206,6 +1233,17 @@ TestOutput GpioTesting::testGpioInterruptLatency()
 {
     bool success = true;
     std::vector<std::string> data;
+
+    joshua::pru::PruIcssManager pru(JOSHUA_SITARA_PRU_REMOTEPROC_ID);
+    std::string detail;
+    if (pru.isRunning()) {
+        std::string rpmsg;
+        if (pru.rpmsgRoundTrip("CAPTURE_EDGE", &rpmsg, 100, &detail)) {
+            data.push_back("PRU edge-capture response: " + rpmsg);
+        } else {
+            data.push_back("PRU edge-capture unavailable: " + detail);
+        }
+    }
 
     // Test interrupt latency
     int pin = 0;

@@ -1,13 +1,13 @@
 /**
  * @file watchdog_and_reset_lib.cpp
- * @brief Implementation file for WatchdogAndResetTesting class — Raspberry Pi 5
- *        Pi5 watchdog: RP1 hardware watchdog, exposed as /dev/watchdog0.
- *        Reset reason available via vcgencmd get_throttled and dmesg.
+ * @brief Implementation file for WatchdogAndResetTesting class — Joshua Sitara Platform
+ *        Joshua Sitara watchdog: PRU-ICSS hardware watchdog, exposed as /dev/watchdog0.
+ *        Reset reason available via ti-syscmd get_throttled and dmesg.
  * @author sandesh ghimire
  * @copyright (C) Soccentric LLC */
 
 #include "watchdog_and_reset_lib.h"
-#include "../platform_rpi5.h"
+#include "../platform_joshua_sitara.h"
 
 #include <cerrno>
 #include <cstdio>
@@ -64,13 +64,13 @@ TestOutput WatchdogAndResetTesting::testWatchdogTimerFunctionality()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Watchdog timer test (Pi5: RP1 watchdog, /dev/watchdog0)");
+    data.push_back("Watchdog timer test (Joshua Sitara: PRU-ICSS watchdog, /dev/watchdog0)");
 
     bool wdExists = (access("/dev/watchdog0", F_OK) == 0);
     data.push_back("/dev/watchdog0 present: " + std::string(wdExists ? "yes" : "no"));
 
     if (!wdExists) {
-        data.push_back("INFO: Load watchdog driver: modprobe bcm2835-wdt or bcm2712-wdt");
+        data.push_back("INFO: Load watchdog driver: modprobe sitara_compatible-wdt or sitara12-wdt");
         data.push_back("INFO: Enable via /boot/firmware/config.txt: dtparam=watchdog=on");
         {
             TestOutput _out;
@@ -130,7 +130,7 @@ TestOutput WatchdogAndResetTesting::testWatchdogTimeoutConfiguration()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Watchdog timeout configuration check (Pi5)");
+    data.push_back("Watchdog timeout configuration check (Joshua Sitara)");
 
     // Check systemd watchdog settings
     std::string sdWd = wdRunCmd("systemctl show --property=RuntimeWatchdogUSec --no-pager 2>/dev/null");
@@ -155,7 +155,7 @@ TestOutput WatchdogAndResetTesting::testWatchdogTimeoutConfiguration()
         if (!procInfo.empty()) data.push_back("/proc/driver/watchdog: " + procInfo);
     }
 
-    data.push_back("Pi5 RP1 watchdog max timeout: 1048575 seconds (~12 days)");
+    data.push_back("Joshua Sitara PRU-ICSS watchdog max timeout: 1048575 seconds (~12 days)");
     data.push_back("PASS: Timeout configuration check complete.");
     {
         TestOutput _out;
@@ -227,7 +227,7 @@ TestOutput WatchdogAndResetTesting::testWatchdogInterruptGeneration()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Watchdog interrupt/pretimeout check (Pi5 RP1 watchdog)");
+    data.push_back("Watchdog interrupt/pretimeout check (Joshua Sitara PRU-ICSS watchdog)");
 
     bool wdExists = (access("/dev/watchdog0", F_OK) == 0);
     if (!wdExists) {
@@ -277,7 +277,7 @@ TestOutput WatchdogAndResetTesting::testPoweronReset()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Power-on reset check (Pi5)");
+    data.push_back("Power-on reset check (Joshua Sitara)");
 
     // dmesg may show reset reason
     std::string dmesgReset = wdRunCmd("dmesg 2>/dev/null | grep -i 'reset\\|reboot\\|power.on' | tail -5");
@@ -291,10 +291,10 @@ TestOutput WatchdogAndResetTesting::testPoweronReset()
     std::string bootTime = wdRunCmd("systemd-analyze 2>/dev/null | head -1");
     if (!bootTime.empty()) data.push_back("Boot time: " + bootTime);
 
-    // Check vcgencmd for power flags
-    std::string throttled = wdRunCmd("vcgencmd get_throttled 2>/dev/null");
+    // Check ti-syscmd for power flags
+    std::string throttled = wdRunCmd("ti-syscmd get_throttled 2>/dev/null");
     if (!throttled.empty()) {
-        data.push_back("vcgencmd throttled: " + throttled);
+        data.push_back("ti-syscmd throttled: " + throttled);
         // Bit 16 = 'was under-voltage', Bit 18 = 'was throttled' — indicates brownout/reset
         unsigned long flags = 0;
         if (sscanf(throttled.c_str(), "throttled=0x%lx", &flags) == 1) {
@@ -322,9 +322,9 @@ TestOutput WatchdogAndResetTesting::testHardwareResetButton()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Hardware reset button check (Pi5)");
-    data.push_back("Pi5 has a dedicated reset button (J2 header) wired to RP1.");
-    data.push_back("J2 pin 1 = RUN (active-low reset), connects to BCM2712 nRSTIN.");
+    data.push_back("Hardware reset button check (Joshua Sitara)");
+    data.push_back("Joshua Sitara has a dedicated reset button (J2 header) wired to PRU-ICSS.");
+    data.push_back("J2 pin 1 = RUN (active-low reset), connects to Sitara AM62x/AM64x nRSTIN.");
 
     // Check input-event for button press
     std::string evdev = wdRunCmd("ls /dev/input/event* 2>/dev/null | head -5");
@@ -354,7 +354,7 @@ TestOutput WatchdogAndResetTesting::testSoftwareReset()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Software reset capability check (Pi5)");
+    data.push_back("Software reset capability check (Joshua Sitara)");
     data.push_back("NOTE: Test does NOT trigger reset.");
 
     // Check reboot command availability
@@ -390,7 +390,7 @@ TestOutput WatchdogAndResetTesting::testWatchdogReset()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Watchdog reset history check (Pi5)");
+    data.push_back("Watchdog reset history check (Joshua Sitara)");
 
     bool wdExists = (access("/dev/watchdog0", F_OK) == 0);
     if (wdExists) {
@@ -432,9 +432,9 @@ TestOutput WatchdogAndResetTesting::testThermalReset()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Thermal reset check (Pi5)");
-    data.push_back("BCM2712 soft thermal shutdown at " +
-                   std::to_string(RPI5_THERMAL_SHUTDOWN_C) + " °C");
+    data.push_back("Thermal reset check (Joshua Sitara)");
+    data.push_back("Sitara AM62x/AM64x soft thermal shutdown at " +
+                   std::to_string(JOSHUA_SITARA_THERMAL_SHUTDOWN_C) + " °C");
 
     // Check current temperature
     long long tempMilliC = -1;
@@ -449,8 +449,8 @@ TestOutput WatchdogAndResetTesting::testThermalReset()
     std::string thermMsg = wdRunCmd("dmesg 2>/dev/null | grep -i 'thermal\\|shutdown\\|overheat' | tail -5");
     if (!thermMsg.empty()) data.push_back("dmesg thermal: " + thermMsg.substr(0, 300));
 
-    // Check vcgencmd for previous throttle
-    std::string throttled = wdRunCmd("vcgencmd get_throttled 2>/dev/null");
+    // Check ti-syscmd for previous throttle
+    std::string throttled = wdRunCmd("ti-syscmd get_throttled 2>/dev/null");
     if (!throttled.empty()) {
         data.push_back("Throttle flags: " + throttled);
         unsigned long flags = 0;
@@ -480,7 +480,7 @@ TestOutput WatchdogAndResetTesting::testResetReasonLogging()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Reset reason logging check (Pi5)");
+    data.push_back("Reset reason logging check (Joshua Sitara)");
 
     // Check systemd journal for last reboot reason
     std::string journal = wdRunCmd("journalctl -b -1 --no-pager -q -n 5 2>/dev/null | head -5");
@@ -489,10 +489,10 @@ TestOutput WatchdogAndResetTesting::testResetReasonLogging()
     std::string reason = wdRunCmd("last reboot 2>/dev/null | head -3");
     if (!reason.empty()) data.push_back("last reboot: " + reason.substr(0, 200));
 
-    // vcgencmd persistent throttle/power flags
-    std::string throttled = wdRunCmd("vcgencmd get_throttled 2>/dev/null");
+    // ti-syscmd persistent throttle/power flags
+    std::string throttled = wdRunCmd("ti-syscmd get_throttled 2>/dev/null");
     if (!throttled.empty()) {
-        data.push_back("vcgencmd get_throttled: " + throttled);
+        data.push_back("ti-syscmd get_throttled: " + throttled);
         unsigned long flags = 0;
         if (sscanf(throttled.c_str(), "throttled=0x%lx", &flags) == 1) {
             if (flags == 0) data.push_back("  -> Clean boot, no reset events recorded.");

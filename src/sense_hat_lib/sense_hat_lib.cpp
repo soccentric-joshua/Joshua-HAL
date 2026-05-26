@@ -1,13 +1,13 @@
 /**
  * @file sense_hat_lib.cpp
- * @brief Sense HAT tests for Raspberry Pi 5.
+ * @brief Sense HAT tests for Joshua Sitara Platform.
  *
- * Hardware: Raspberry Pi Sense HAT (V1/V2) on 40-pin GPIO header.
+ * Hardware: Joshua Sitara Sense HAT (V1/V2) on 40-pin GPIO header.
  *   - HTS221  humidity/temp sensor  — I2C-1 @ 0x5C, IIO driver hts221
  *   - LPS25H  pressure sensor       — I2C-1 @ 0x5F, IIO driver lps25h
  *   - LSM9DS1 9-DOF IMU             — I2C-1 accel 0x1C / gyro 0x6A / mag 0x1E
  *   - LED matrix ATtiny88           — I2C-1 @ 0x46, exposed as /dev/fb1 via
- *                                     rpi-sense-fb kernel module
+ *                                     sitara-sense-fb kernel module
  *   - 5-way joystick                — I2C-1 @ 0x46, evdev input device
  *
  * All paths are accessed via Linux sysfs / IIO / evdev.
@@ -16,7 +16,7 @@
  */
 
 #include "sense_hat_lib.h"
-#include "../platform_rpi5.h"
+#include "../platform_joshua_sitara.h"
 
 #include <array>
 #include <cstdio>
@@ -88,7 +88,7 @@ SenseHatTesting::~SenseHatTesting() {}
 TestOutput SenseHatTesting::testSenseHatDetection()
 {
     std::vector<std::string> data;
-    data.push_back("=== Sense HAT Detection (Pi5 I2C-1) ===");
+    data.push_back("=== Sense HAT Detection (Joshua Sitara I2C-1) ===");
 
     bool i2c1 = shPathExists("/dev/i2c-1");
     data.push_back(i2c1 ? "[PASS] /dev/i2c-1 present"
@@ -99,8 +99,8 @@ TestOutput SenseHatTesting::testSenseHatDetection()
     bool overlayLoaded = !shRunCmd("dtoverlay -l 2>/dev/null | grep -c 'sense'").empty();
     (void)overlayLoaded;
     bool senseFb = shPathExists("/dev/fb1") || !shRunCmd("lsmod | grep -c 'rpi_sense_fb'").empty();
-    data.push_back(senseFb ? "[PASS] rpi-sense-fb module / /dev/fb1 present"
-                           : "[INFO] rpi-sense-fb not loaded (add dtoverlay=rpi-sense-hat to config.txt)");
+    data.push_back(senseFb ? "[PASS] sitara-sense-fb module / /dev/fb1 present"
+                           : "[INFO] sitara-sense-fb not loaded (add dtoverlay=sitara-sense-hat to config.txt)");
 
     // Sense HAT I2C addresses
     struct { const char* name; const char* addr; } addrs[] = {
@@ -140,15 +140,15 @@ TestOutput SenseHatTesting::testSenseHatDetection()
 }
 
 /**
- * @brief Verify the 8×8 LED matrix is accessible via the rpi-sense-fb framebuffer.
+ * @brief Verify the 8×8 LED matrix is accessible via the sitara-sense-fb framebuffer.
  */
 TestOutput SenseHatTesting::testLedMatrix()
 {
     std::vector<std::string> data;
-    data.push_back("=== Sense HAT LED Matrix (rpi-sense-fb / /dev/fb1) ===");
+    data.push_back("=== Sense HAT LED Matrix (sitara-sense-fb / /dev/fb1) ===");
 
     bool fb1 = shPathExists("/dev/fb1");
-    data.push_back(fb1 ? "[PASS] /dev/fb1 (rpi-sense-fb framebuffer) present"
+    data.push_back(fb1 ? "[PASS] /dev/fb1 (sitara-sense-fb framebuffer) present"
                        : "[INFO] /dev/fb1 not found");
 
     // Try /dev/fb0 as fallback (single-display systems)
@@ -412,7 +412,7 @@ TestOutput SenseHatTesting::testJoystick()
 
     // The Sense HAT joystick registers as EV_KEY input via ATtiny88
     std::string inputs = shRunCmd(
-        "grep -rl 'Raspberry Pi Sense HAT Joystick' /sys/class/input/*/device/name 2>/dev/null | head -2");
+        "grep -rl 'Joshua Sitara Sense HAT Joystick' /sys/class/input/*/device/name 2>/dev/null | head -2");
     if (inputs.empty())
     {
         // Fallback: list all event devices

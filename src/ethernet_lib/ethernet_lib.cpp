@@ -1,13 +1,13 @@
 /**
  * @file ethernet_lib.cpp
- * @brief Implementation file for EthernetTesting class — Raspberry Pi 5
- *        Tests the BCM2712 built-in Gigabit Ethernet (1 GbE, not 10 GbE).
- *        Pi5 does NOT have 10 GbE hardware.
+ * @brief Implementation file for EthernetTesting class — Joshua Sitara Platform
+ *        Tests the Sitara AM62x/AM64x built-in Gigabit Ethernet (1 GbE, not 10 GbE).
+ *        Joshua Sitara does NOT have 10 GbE hardware.
  * @author sandesh ghimire
  * @copyright (C) Soccentric LLC */
 
 #include "ethernet_lib.h"
-#include "../platform_rpi5.h"
+#include "../platform_joshua_sitara.h"
 
 #include <chrono>
 #include <cstdio>
@@ -23,10 +23,10 @@
 #include <vector>
 
 // ---------------------------------------------------------------------------
-// Pi5 Ethernet constants
+// Joshua Sitara Ethernet constants
 // ---------------------------------------------------------------------------
-static constexpr const char* ETH_IFACE     = RPI5_ETH_IFACE;     // "eth0"
-static constexpr int         ETH_SPEED_MBPS = RPI5_ETH_SPEED_MBPS; // 1000
+static constexpr const char* ETH_IFACE     = JOSHUA_SITARA_ETH_IFACE;     // "eth0"
+static constexpr int         ETH_SPEED_MBPS = JOSHUA_SITARA_ETH_SPEED_MBPS; // 1000
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -93,14 +93,14 @@ EthernetTesting::~EthernetTesting()
 
 // ---------------------------------------------------------------------------
 // 1. test10GigabitLinkEstablishment
-//    Pi5 only has 1 GbE (BCM2712 MAC). Document and verify 1G link.
+//    Joshua Sitara only has 1 GbE (Sitara AM62x/AM64x MAC). Document and verify 1G link.
 // ---------------------------------------------------------------------------
 TestOutput EthernetTesting::test10GigabitLinkEstablishment()
 {
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("NOTE: Pi5 has BCM2712 GbE (1 Gbps), NOT 10 GbE.");
+    data.push_back("NOTE: Joshua Sitara has Sitara AM62x/AM64x GbE (1 Gbps), NOT 10 GbE.");
     data.push_back("Ethernet interface: " + std::string(ETH_IFACE));
 
     if (!ifaceExists(ETH_IFACE)) {
@@ -155,7 +155,7 @@ TestOutput EthernetTesting::test10gbeTransmitThroughput()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Ethernet TX throughput check (Pi5 GbE — max ~940 Mbps)");
+    data.push_back("Ethernet TX throughput check (Joshua Sitara GbE — max ~940 Mbps)");
 
     if (!ifaceExists(ETH_IFACE)) {
         data.push_back("SKIP: Interface not present.");
@@ -180,7 +180,7 @@ TestOutput EthernetTesting::test10gbeTransmitThroughput()
     if (txDropped >= 0) data.push_back("TX dropped: " + std::to_string(txDropped));
 
     // Report theoretical max
-    data.push_back("Pi5 GbE theoretical max TX: ~940 Mbps (1000BASE-T, 4% overhead)");
+    data.push_back("Joshua Sitara GbE theoretical max TX: ~940 Mbps (1000BASE-T, 4% overhead)");
 
     if (txErrors > 0) {
         passed = false;
@@ -306,7 +306,7 @@ TestOutput EthernetTesting::testJumboFramesSupport()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Jumbo frame (MTU) check for Pi5 GbE");
+    data.push_back("Jumbo frame (MTU) check for Joshua Sitara GbE");
 
     if (!ifaceExists(ETH_IFACE)) {
         data.push_back("SKIP: Interface not present.");
@@ -329,13 +329,13 @@ TestOutput EthernetTesting::testJumboFramesSupport()
 
     // Check if BCM genet driver supports jumbo frames
     std::string driver = ethReadFile("/sys/class/net/" + std::string(ETH_IFACE) + "/device/uevent");
-    data.push_back("Pi5 GbE driver: bcmgenet (BCM2712 built-in MAC)");
+    data.push_back("Joshua Sitara GbE driver: bcmgenet (Sitara AM62x/AM64x built-in MAC)");
 
     if (mtu >= 9000) {
         data.push_back("PASS: Jumbo frames supported (MTU " + std::to_string(mtu) + ").");
     } else if (mtu >= 1500) {
         data.push_back("INFO: Standard MTU 1500. Enable jumbo: ip link set eth0 mtu 9000");
-        data.push_back("NOTE: bcmgenet supports jumbo frames up to 9014 bytes on Pi5.");
+        data.push_back("NOTE: bcmgenet supports jumbo frames up to 9014 bytes on Joshua Sitara.");
     } else {
         passed = false;
         data.push_back("FAIL: MTU below standard 1500 bytes.");
@@ -367,7 +367,7 @@ TestOutput EthernetTesting::testFlowControl()
         data.push_back("ethtool -a eth0: " + fc.substr(0, 200));
     } else {
         data.push_back("ethtool not available or interface down.");
-        data.push_back("Pi5 bcmgenet driver: flow control configurable via ethtool -A.");
+        data.push_back("Joshua Sitara bcmgenet driver: flow control configurable via ethtool -A.");
     }
 
     // Check RX/TX pause frame counters
@@ -410,7 +410,7 @@ TestOutput EthernetTesting::testVlanTagging()
     std::string vlanFeature = ethRunCmd("ethtool -k eth0 2>/dev/null | grep -i vlan");
     if (!vlanFeature.empty()) data.push_back("VLAN offload features: " + vlanFeature.substr(0, 200));
 
-    data.push_back("Pi5 supports software VLAN via 8021q kernel module.");
+    data.push_back("Joshua Sitara supports software VLAN via 8021q kernel module.");
     data.push_back("PASS: VLAN capability check complete.");
 
     {
@@ -432,15 +432,15 @@ TestOutput EthernetTesting::testChecksumOffload()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Checksum offload (TX/RX) check for Pi5 GbE");
+    data.push_back("Checksum offload (TX/RX) check for Joshua Sitara GbE");
 
     std::string features = ethRunCmd("ethtool -k eth0 2>/dev/null | grep -i 'checksum\\|offload'");
     if (!features.empty()) {
         data.push_back("Offload features: " + features.substr(0, 500));
     } else {
         data.push_back("ethtool: not available. Using sysfs fallback.");
-        // Pi5 bcmgenet supports RX/TX checksum offload
-        data.push_back("Pi5 bcmgenet: supports TX/RX IPv4/IPv6 checksum offload.");
+        // Joshua Sitara bcmgenet supports RX/TX checksum offload
+        data.push_back("Joshua Sitara bcmgenet: supports TX/RX IPv4/IPv6 checksum offload.");
     }
 
     data.push_back("PASS: Checksum offload check complete.");
@@ -478,7 +478,7 @@ TestOutput EthernetTesting::testIeee8021asTimeSynchronization()
     if (!ptpFeature.empty()) {
         data.push_back("ethtool -T: " + ptpFeature.substr(0, 300));
     } else {
-        data.push_back("Pi5 bcmgenet: basic PTP via software timestamping.");
+        data.push_back("Joshua Sitara bcmgenet: basic PTP via software timestamping.");
         data.push_back("      Hardware PTP requires BCM54213PE PHY timestamping support.");
     }
 
@@ -502,13 +502,13 @@ TestOutput EthernetTesting::testIeee8021qbv()
     bool passed = true;
 
     data.push_back("IEEE 802.1Qbv Time-Aware Shaper (TAS) check");
-    data.push_back("Pi5 bcmgenet: does NOT support hardware TAS/TAPRIO.");
+    data.push_back("Joshua Sitara bcmgenet: does NOT support hardware TAS/TAPRIO.");
     data.push_back("Software TAPRIO: available via Linux TC TAPRIO qdisc.");
 
     std::string taprio = ethRunCmd("tc qdisc show dev eth0 2>/dev/null | grep taprio");
     data.push_back("TAPRIO qdisc active: " + (taprio.empty() ? "no" : "YES — " + taprio));
 
-    data.push_back("PASS: TAS check complete (software-only on Pi5).");
+    data.push_back("PASS: TAS check complete (software-only on Joshua Sitara).");
     {
         TestOutput _out;
         _out.status = passed ? hal::Status::PASS : hal::Status::FAIL;
@@ -528,9 +528,9 @@ TestOutput EthernetTesting::testIeee8021qbu()
     bool passed = true;
 
     data.push_back("IEEE 802.1Qbu Frame Preemption check");
-    data.push_back("Pi5 bcmgenet: frame preemption NOT supported in hardware.");
+    data.push_back("Joshua Sitara bcmgenet: frame preemption NOT supported in hardware.");
     data.push_back("      Frame preemption requires TSN-capable NIC (Intel I225, Microchip LAN9668, etc.).");
-    data.push_back("PASS: Frame preemption check complete (N/A on Pi5).");
+    data.push_back("PASS: Frame preemption check complete (N/A on Joshua Sitara).");
     {
         TestOutput _out;
         _out.status = passed ? hal::Status::PASS : hal::Status::FAIL;
@@ -574,12 +574,12 @@ TestOutput EthernetTesting::testTsnTrafficScheduling()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("TSN traffic scheduling check (Pi5 software TSN via Linux TC)");
+    data.push_back("TSN traffic scheduling check (Joshua Sitara software TSN via Linux TC)");
 
     std::string tc = ethRunCmd("tc qdisc show dev eth0 2>/dev/null");
     data.push_back("tc qdisc: " + (tc.empty() ? "(empty/default)" : tc.substr(0, 300)));
 
-    data.push_back("Pi5 supports software TSN: TAPRIO, CBS, ETF qdiscs.");
+    data.push_back("Joshua Sitara supports software TSN: TAPRIO, CBS, ETF qdiscs.");
     data.push_back("Hardware TSN requires dedicated TSN-MAC NIC.");
     data.push_back("PASS: TSN scheduling check complete.");
     {
@@ -601,7 +601,7 @@ TestOutput EthernetTesting::testTsnLatencyGuarantees()
     bool passed = true;
 
     data.push_back("TSN latency guarantee check");
-    data.push_back("Pi5 with software TSN: software-controlled scheduling jitter ~10–50 µs");
+    data.push_back("Joshua Sitara with software TSN: software-controlled scheduling jitter ~10–50 µs");
     data.push_back("Hardware TSN (<1 µs jitter): requires dedicated TSN NIC.");
 
     // Check cyclictest / RT kernel
@@ -613,7 +613,7 @@ TestOutput EthernetTesting::testTsnLatencyGuarantees()
         data.push_back("Kernel: " + v.substr(0, 80));
         rtKernel = (v.find("PREEMPT_RT") != std::string::npos || v.find("PREEMPT RT") != std::string::npos);
     }
-    data.push_back("RT kernel (PREEMPT_RT): " + std::string(rtKernel ? "YES" : "no (use rpi-realtime kernel for TSN)"));
+    data.push_back("RT kernel (PREEMPT_RT): " + std::string(rtKernel ? "YES" : "no (use sitara-realtime kernel for TSN)"));
     data.push_back("PASS: TSN latency check complete.");
     {
         TestOutput _out;
@@ -640,7 +640,7 @@ TestOutput EthernetTesting::testTsnTimePrecision()
     if (!chrony.empty()) data.push_back("chrony: " + chrony);
 
     std::string ptp = ethRunCmd("ptp4l -i eth0 -q -2 --summary_interval=0 2>/dev/null &");
-    data.push_back("Time sync method: chrony/NTP for software-only Pi5 TSN.");
+    data.push_back("Time sync method: chrony/NTP for software-only Joshua Sitara TSN.");
     data.push_back("PASS: Time precision check complete.");
     {
         TestOutput _out;
@@ -661,7 +661,7 @@ TestOutput EthernetTesting::test1gPhyFunctionality()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Pi5 GbE PHY: BCM54213PE (Broadcom Gigabit PHY)");
+    data.push_back("Joshua Sitara GbE PHY: BCM54213PE (Broadcom Gigabit PHY)");
 
     // Check PHY via ethtool
     std::string phyInfo = ethRunCmd("ethtool eth0 2>/dev/null");
@@ -712,7 +712,7 @@ TestOutput EthernetTesting::testLinkSpeedNegotiation()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Auto-negotiation check for Pi5 GbE");
+    data.push_back("Auto-negotiation check for Joshua Sitara GbE");
 
     std::string autoneg = ethRunCmd("ethtool eth0 2>/dev/null | grep -i 'auto-negotiation'");
     data.push_back("Auto-negotiation: " + (autoneg.empty() ? "(ethtool not available)" : autoneg));
@@ -743,7 +743,7 @@ TestOutput EthernetTesting::testAutomdimdix()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Auto-MDIX check — Pi5 BCM54213PE PHY");
+    data.push_back("Auto-MDIX check — Joshua Sitara BCM54213PE PHY");
     data.push_back("BCM54213PE supports Auto-MDIX — straight and crossover cables work.");
 
     std::string mdix = ethRunCmd("ethtool eth0 2>/dev/null | grep -i 'MDI'");
@@ -770,7 +770,7 @@ TestOutput EthernetTesting::testEthernetCableDiagnostics()
     std::vector<std::string> data;
     bool passed = true;
 
-    data.push_back("Ethernet cable diagnostics (Pi5)");
+    data.push_back("Ethernet cable diagnostics (Joshua Sitara)");
 
     // Check cable test support
     std::string cableTest = ethRunCmd("ethtool --cable-test eth0 2>/dev/null");

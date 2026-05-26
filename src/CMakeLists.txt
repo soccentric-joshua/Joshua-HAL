@@ -6,7 +6,10 @@ install(TARGETS lib_base
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
-install(FILES lib_base.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/acadia_hal)
+install(FILES lib_base.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/joshua_hal)
+
+# PRU-ICSS backend library used by deterministic I/O modules.
+add_subdirectory(pru_icss_lib)
 
 # Add all feature libraries
 add_subdirectory(gpu_lib)
