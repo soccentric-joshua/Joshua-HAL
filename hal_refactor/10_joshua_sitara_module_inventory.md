@@ -1,17 +1,7 @@
-# Joshua Sitara HAL Module Inventory and Retarget Map
-
-This inventory was built from all module and test directories under src/ and tests/.
-The public HAL module APIs are preserved; only backend/platform bindings are retargeted.
-
-## Backend Classes
-
-- ARM userspace backend: TI Processor SDK Linux / Yocto
+# Joshua Sitara HAL Module Inventory and Retarget Map This inventory was built from all module and test directories under src/ and tests/.
+The public HAL module APIs are preserved; only backend/platform bindings are retargeted. ## Backend Classes - ARM userspace backend: TI Processor SDK Linux / Yocto
 - Deterministic I/O backend: PRU-ICSS firmware via remoteproc + RPMsg
-- Standard peripheral backend: libgpiod + Linux device nodes (I2C/SPI/PWM/UART)
-
-## Module-to-Joshua Mapping
-
-| Source module | Joshua target module | Backend mapping |
+- Standard peripheral backend: libgpiod + Linux device nodes (I2C/SPI/PWM/UART) ## Module-to-Joshua Mapping | Source module | Joshua target module | Backend mapping |
 |---|---|---|
 | audio_interfaces | audio_interfaces | ALSA/I2S on Sitara + PRU timing assist |
 | camera_interfaces_lib | camera_interfaces_lib | V4L2/media graph on Sitara |
@@ -48,13 +38,7 @@ The public HAL module APIs are preserved; only backend/platform bindings are ret
 | usb_lib | usb_lib | xHCI/device role tests |
 | video_encode_decode_lib | video_encode_decode_lib | V4L2 codec path checks |
 | vision_accelerator_lib | vision_accelerator_lib | optional accelerator integration |
-| watchdog_and_reset_lib | watchdog_and_reset_lib | watchdog and reset workflows |
-
-## Test Inventory Mapping
-
-All existing test directories are preserved and mapped one-to-one:
-
-- tests/audio_interfaces -> Joshua audio backend
+| watchdog_and_reset_lib | watchdog_and_reset_lib | watchdog and reset workflows | ## Test Inventory Mapping All existing test directories are preserved and mapped one-to-one: - tests/audio_interfaces -> Joshua audio backend
 - tests/camera_interfaces -> Joshua camera backend
 - tests/camera_module3 -> Joshua camera-module backend
 - tests/clock_and_timing -> PRU-assisted timing backend
@@ -88,11 +72,7 @@ All existing test directories are preserved and mapped one-to-one:
 - tests/usb -> Sitara USB backend
 - tests/video_encode_decode -> Sitara video backend
 - tests/vision_accelerator -> Sitara vision backend
-- tests/watchdog_and_reset -> Sitara watchdog/reset backend
-
-## PRU Contract Summary
-
-- Control plane: remoteproc state/firmware nodes
+- tests/watchdog_and_reset -> Sitara watchdog/reset backend ## PRU Contract Summary - Control plane: remoteproc state/firmware nodes
 - Data plane: RPMsg endpoint /dev/rpmsg_pru30
 - Deterministic services: GPIO edge capture, toggle timing, PWM generation
 - Recovery: stop/start cycle and RPMsg health probe
