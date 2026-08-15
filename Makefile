@@ -13,7 +13,7 @@ CROSS_BUILD_DIR := build/cross
 
 # Parallel jobs (override with make JOBS=N)
 JOBS := $(shell nproc)
-DOCKER_IMAGE := acadia
+DOCKER_IMAGE := joshua
 DOCKER_CROSS_BUILD_DIR := /workspace/build/cross
 
 # Host architecture as shown by file(1) (e.g. x86-64, aarch64)
