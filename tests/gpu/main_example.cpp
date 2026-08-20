@@ -42,9 +42,11 @@ int main(int argc, char* argv[])
         int failed = 0;
         std::chrono::duration<double> totalTime = std::chrono::duration<double>::zero();
         for (const auto& res : results) {
-            std::cout << std::left << std::setw(40) << res.name << std::setw(10) << (res.passed ? "PASS" : "FAIL") << std::setw(15)
-                      << std::fixed << std::setprecision(6) << res.duration.count() << std::endl;
-            if (res.passed)
+            std::cout << std::left << std::setw(40) << res.name << std::setw(10)
+                      << (res.output.status == hal::Status::PASS ? "PASS" : "FAIL")
+                      << std::setw(15) << std::fixed << std::setprecision(6)
+                      << std::chrono::duration<double>(res.duration).count() << std::endl;
+            if (res.output.status == hal::Status::PASS)
                 passed++;
             else
                 failed++;

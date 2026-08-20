@@ -1,0 +1,6 @@
+add_executable(test_mipi_dsi main.cpp)
+target_link_libraries(test_mipi_dsi PRIVATE mipi_dsi_lib)
+target_include_directories(test_mipi_dsi PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_mipi_dsi COMMAND test_mipi_dsi)
+set_tests_properties(test_mipi_dsi PROPERTIES TIMEOUT 300)
+install(TARGETS test_mipi_dsi RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

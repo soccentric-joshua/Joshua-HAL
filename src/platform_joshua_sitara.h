@@ -88,6 +88,63 @@ static constexpr const char* JOSHUA_SITARA_NVME_PATH   = "/dev/nvme0n1";
 // PMIC/power supply interface.
 static constexpr const char* JOSHUA_SITARA_POWER_SUPPLY_PATH = "/sys/class/power_supply";
 
+// I2C controller buses on the Sitara AM62x (I2C0/I2C1/I2C2).
+static constexpr const char* JOSHUA_SITARA_I2C_DEV1  = "/dev/i2c-1";
+static constexpr const char* JOSHUA_SITARA_I2C_DEV2  = "/dev/i2c-2";
+static constexpr const char* JOSHUA_SITARA_I2C_SYSFS = "/sys/bus/i2c/devices";
+static constexpr int         JOSHUA_SITARA_I2C_MAX_FREQ_HZ = 400000; // Fast-mode
+
+// SPI controller.
+static constexpr const char* JOSHUA_SITARA_SPI_DEV0 = "/dev/spidev0.0";
+static constexpr const char* JOSHUA_SITARA_SPI_DEV1 = "/dev/spidev0.1";
+static constexpr int         JOSHUA_SITARA_SPI_MAX_HZ = 48000000;
+
+// CAN interface.
+static constexpr const char* JOSHUA_SITARA_CAN_IFACE = "can0";
+static constexpr int         JOSHUA_SITARA_CAN_BITRATE = 500000;
+
+// RS-485 (half-duplex serial) defaults.
+static constexpr const char* JOSHUA_SITARA_RS485_UART = "/dev/ttyS4";
+static constexpr int         JOSHUA_SITARA_RS485_BAUD = 115200;
+
+// Analog input (ADC) via the TI IIO subsystem.
+static constexpr const char* JOSHUA_SITARA_ADC_BASE = "/sys/bus/iio/devices";
+static constexpr const char* JOSHUA_SITARA_ADC_CH0_RAW = "/sys/bus/iio/devices/iio:device0/in_voltage0_raw";
+static constexpr int         JOSHUA_SITARA_ADC_BITS = 12; // AM62x ADC resolution
+
+// PWM outputs via the Linux PWM subsystem.
+static constexpr const char* JOSHUA_SITARA_PWM_BASE = "/sys/class/pwm/pwmchip0";
+static constexpr int         JOSHUA_SITARA_PWM_CHANNELS = 4;
+
+// Storage: SD card / eMMC / NVMe (NVMe already defined above).
+static constexpr const char* JOSHUA_SITARA_SD_DEV      = "/dev/mmcblk1";
+static constexpr const char* JOSHUA_SITARA_EMMC_DEV    = "/dev/mmcblk0";
+static constexpr const char* JOSHUA_SITARA_NVME_SYSFS  = "/sys/class/nvme";
+static constexpr const char* JOSHUA_SITARA_MMC_SYSFS   = "/sys/class/mmc_host";
+
+// Real-time clock.
+static constexpr const char* JOSHUA_SITARA_RTC_DEV  = "/dev/rtc0";
+static constexpr const char* JOSHUA_SITARA_RTC_SYSFS = "/sys/class/rtc/rtc0";
+
+// Battery / power-supply monitor.
+static constexpr const char* JOSHUA_SITARA_BATTERY_SYSFS = "/sys/class/power_supply/BAT0";
+static constexpr const char* JOSHUA_SITARA_BATTERY_VOLTAGE = "/sys/class/power_supply/BAT0/voltage_now";
+
+// Bluetooth radio (BlueZ).
+static constexpr const char* JOSHUA_SITARA_BT_HCI = "hci0";
+static constexpr const char* JOSHUA_SITARA_BT_SYSFS = "/sys/class/bluetooth/hci0";
+
+// MIPI CSI-2 camera + MIPI DSI display interfaces.
+static constexpr const char* JOSHUA_SITARA_CSI_DEVICE2 = "/dev/video2";
+static constexpr const char* JOSHUA_SITARA_CSI_MEDIA1  = "/dev/media1";
+static constexpr const char* JOSHUA_SITARA_DSI_DEV     = "/dev/fb1";
+static constexpr const char* JOSHUA_SITARA_DSI_PANEL   = "/sys/class/display";
+
+// IMU/accelerometer (TI IIO or PRU-assisted I2C sensor bus).
+static constexpr const char* JOSHUA_SITARA_ACCEL_BASE = "/sys/bus/iio/devices";
+static constexpr const char* JOSHUA_SITARA_ACCEL_ACCEL_X = "/sys/bus/iio/devices/iio:device0/in_accel_x_raw";
+static constexpr int         JOSHUA_SITARA_ACCEL_RANGE_G = 8;
+
 // Optional external AI accelerators.
 static constexpr const char* JOSHUA_SITARA_HAILO8_PCIE_VENDOR = "1e60";
 static constexpr const char* JOSHUA_SITARA_CORAL_USB_VENDOR   = "18d1";

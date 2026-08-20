@@ -1,0 +1,6 @@
+add_executable(test_emmc main.cpp)
+target_link_libraries(test_emmc PRIVATE emmc_lib)
+target_include_directories(test_emmc PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_emmc COMMAND test_emmc)
+set_tests_properties(test_emmc PROPERTIES TIMEOUT 300)
+install(TARGETS test_emmc RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

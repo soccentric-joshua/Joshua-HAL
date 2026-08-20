@@ -29,7 +29,8 @@ int main()
 
     std::cout << "\nResults:\n";
     for (const auto& result : results) {
-        std::cout << "  " << result.name << ": " << (result.passed ? "PASS" : "FAIL") << "\n";
+        std::cout << "  " << result.name << ": "
+                  << (result.output.status == hal::Status::PASS ? "PASS" : "FAIL") << "\n";
     }
 
     return 0;

@@ -1,0 +1,6 @@
+add_executable(test_rtc main.cpp)
+target_link_libraries(test_rtc PRIVATE rtc_lib)
+target_include_directories(test_rtc PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_rtc COMMAND test_rtc)
+set_tests_properties(test_rtc PROPERTIES TIMEOUT 300)
+install(TARGETS test_rtc RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

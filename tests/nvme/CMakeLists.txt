@@ -1,0 +1,6 @@
+add_executable(test_nvme main.cpp)
+target_link_libraries(test_nvme PRIVATE nvme_lib)
+target_include_directories(test_nvme PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_nvme COMMAND test_nvme)
+set_tests_properties(test_nvme PROPERTIES TIMEOUT 300)
+install(TARGETS test_nvme RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

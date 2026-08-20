@@ -1,0 +1,6 @@
+add_executable(test_pwm_output main.cpp)
+target_link_libraries(test_pwm_output PRIVATE pwm_output_lib)
+target_include_directories(test_pwm_output PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_pwm_output COMMAND test_pwm_output)
+set_tests_properties(test_pwm_output PROPERTIES TIMEOUT 300)
+install(TARGETS test_pwm_output RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

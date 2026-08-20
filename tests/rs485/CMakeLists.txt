@@ -1,0 +1,6 @@
+add_executable(test_rs485 main.cpp)
+target_link_libraries(test_rs485 PRIVATE rs485_lib)
+target_include_directories(test_rs485 PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_rs485 COMMAND test_rs485)
+set_tests_properties(test_rs485 PROPERTIES TIMEOUT 300)
+install(TARGETS test_rs485 RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

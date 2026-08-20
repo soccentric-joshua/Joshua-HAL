@@ -1,0 +1,6 @@
+add_executable(test_sd_card main.cpp)
+target_link_libraries(test_sd_card PRIVATE sd_card_lib)
+target_include_directories(test_sd_card PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_sd_card COMMAND test_sd_card)
+set_tests_properties(test_sd_card PROPERTIES TIMEOUT 300)
+install(TARGETS test_sd_card RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

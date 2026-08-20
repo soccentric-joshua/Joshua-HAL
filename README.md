@@ -7,7 +7,7 @@
 | GPU | Sitara AM62x (12 shader quad cores, 800 MHz max) |
 | Memory | 4 GB / 8 GB LPDDR4X-4267 |
 | AI Accelerator | Hailo-8 HAT+ (PCIe, ~26 INT8 TOPS) or Coral USB Edge TPU (~4 TOPS) |
-| OS | Joshua Sitara OS (64-bit) / Ubuntu 24.04 ARM64 | ### Key Features - **Modular Library Architecture**: Separate libraries for CPU, GPU, DLA (Hailo-8/Coral), video codec (V4L2 M2M), camera (Unicam/PRU-ICSS), audio (PRU-ICSS I2S), PCIe, USB (xhci-hcd), GPIO (gpiochip4), storage, Ethernet, and more.
+| OS | Joshua Sitara OS (64-bit) / Ubuntu 24.04 ARM64 | ### Key Features - **Modular Library Architecture**: 51 hardware modules covering the full Sitara AM62x + PRU-ICSS peripheral set: compute (CPU, GPU, DLA, vision, video codec), camera (Unicam/CSI/PRU-ICSS), display (DRM/DSI), audio (PRU-ICSS I2S), connectivity (PCIe, USB, Ethernet, switch, communication, MCU, I2C, SPI, UART, CAN, RS-485, Bluetooth, serdes), storage (SD/eMMC/NVMe/MMC), power (PMIC, battery, PoE), sensors (IMU, accelerometer, GNSS, ADC, environmental, thermal, sense HAT), timing (RTC, clock), safety (watchdog, functional safety, reliability), and GPIO (gpiochip + PRU).
 - **Joshua Sitara Platform Header**: Centralised constants in `src/platform_joshua_sitara.h` (device paths, thermal thresholds, memory bandwidth).
 - **Cross-compilation via Docker**: ARM64 Ubuntu 24.04 container (`Sitara AM62x-builder`).
 - **Comprehensive Testing**: Unit tests, integration tests, and deployment workflows.
@@ -25,7 +25,10 @@ sudo apt install -y build-essential cmake ninja-build git \ protobuf-compiler li
 make build
 make run
 ``` ### Docker-based Cross-Compilation The Docker image is based on `ubuntu:22.04` (ARM64) and is named `Joshua`. #### Build Process 1. **Ensure Docker is Installed** ```bash make docker-install ``` 2. **Build the Docker Image** ```bash make docker-image ``` This creates a Docker image named `Joshua` based on `ubuntu:22.04` with all necessary ARM64 build dependencies pre-installed. 3. **Build** ```bash make docker-build ``` This command: - Runs the Docker container with the project mounted - Configures the build system with Ninja generator - Builds all targets - Outputs binaries in the `build/cross/` directory 4. **Deploy and Run on Target Sitara AM62x** ```bash # For Sitara AM62x Primary (192.168.1.3) make run-a # For Sitara AM62x Secondary (192.168.1.13) make run-b # Specify custom IP address make run-b IP_B=192.168.200.2
-``` ## Platform-Specific Notes ### AI Inference (DLA)
+``` ## Registry
+The canonical module manifest `protos/registry/modules.yaml` defines **51 active modules**, each with an implementation under `src/<id>_lib/`, a proto contract under `protos/modules/<id>.proto`, a test binary under `tests/<id>/`, and a registration in `protos/server/module_registry_all.cpp`. Every module is served over gRPC by `hal_server` in all four execution modes (SINGLE_SHOT, LONG_TERM, MONITORING, EVENT_BASED).
+
+## Platform-Specific Notes ### AI Inference (DLA)
 - **Hailo-8** (PCIe HAT+): detected at `/dev/hailo0`, kernel module `hailo_pci` (vendor `0x1e60`)
 - **Coral USB Edge TPU**: detected via USB vendor `18d1` at `/dev/apex_0` ### GPU (Sitara AM62x)
 - devfreq sysfs: `/sys/class/devfreq/fde00000.gpu/`

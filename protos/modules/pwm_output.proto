@@ -1,6 +1,6 @@
-// pwm_output.proto — PWM output testing
+// Source: src/pwm_output_lib/pwm_output_lib.h  (class PwmOutput : public TestBase)
 //
-// Field-numbering rules: numbers start at 1, never renumber.
+// Field-numbering rules: numbers start at 1, never renumber, mark removed fields reserved.
 
 syntax = "proto3";
 
@@ -10,22 +10,22 @@ import "common.proto";
 
 // Config for the pwm_output module.
 // Leave test_names empty to run all available tests.
+//
+// Available tests (in declaration order):
+//   testPwmChipPresent
+//   testPwmExportChannel
+//   testPwmFrequency
+//   testPwmDutyCycle
+//   testPwmPolarity
+//   testPwmRange
 message Config {
-  hal.common.CommonConfig common     = 1;
-  repeated string         test_names = 2;
+  // Names of individual tests to execute; empty list = run all tests.
+  repeated string test_names = 1;
 }
 
-// Result for the pwm_output module.
+// Result from a single pwm_output test run.
 message Result {
-  hal.common.TestStatus   status     = 1;
-  string                  message    = 2;
-  repeated TestDetail     details    = 3;
-}
-
-message TestDetail {
-  string name    = 1;
-  bool   passed  = 2;
-  string message = 3;
-  double value   = 4;
-  string unit    = 5;
+  reserved 1;
+  reserved "test_results";
+  repeated hal.common.TestResult results = 2;
 }

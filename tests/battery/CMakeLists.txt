@@ -1,0 +1,6 @@
+add_executable(test_battery main.cpp)
+target_link_libraries(test_battery PRIVATE battery_lib)
+target_include_directories(test_battery PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_battery COMMAND test_battery)
+set_tests_properties(test_battery PROPERTIES TIMEOUT 300)
+install(TARGETS test_battery RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

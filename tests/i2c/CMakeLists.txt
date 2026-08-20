@@ -1,0 +1,6 @@
+add_executable(test_i2c main.cpp)
+target_link_libraries(test_i2c PRIVATE i2c_lib)
+target_include_directories(test_i2c PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_i2c COMMAND test_i2c)
+set_tests_properties(test_i2c PROPERTIES TIMEOUT 300)
+install(TARGETS test_i2c RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

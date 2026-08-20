@@ -39,6 +39,22 @@
 #include "video_encode_decode_lib/video_encode_decode_lib.h"
 #include "vision_accelerator_lib/vision_accelerator_lib.h"
 #include "watchdog_and_reset_lib/watchdog_and_reset_lib.h"
+#include "i2c_lib/i2c_lib.h"
+#include "spi_lib/spi_lib.h"
+#include "uart_lib/uart_lib.h"
+#include "rtc_lib/rtc_lib.h"
+#include "can_bus_lib/can_bus_lib.h"
+#include "rs485_lib/rs485_lib.h"
+#include "analog_input_lib/analog_input_lib.h"
+#include "pwm_output_lib/pwm_output_lib.h"
+#include "sd_card_lib/sd_card_lib.h"
+#include "nvme_lib/nvme_lib.h"
+#include "emmc_lib/emmc_lib.h"
+#include "battery_lib/battery_lib.h"
+#include "bluetooth_lib/bluetooth_lib.h"
+#include "mipi_csi_lib/mipi_csi_lib.h"
+#include "mipi_dsi_lib/mipi_dsi_lib.h"
+#include "accelerometer_lib/accelerometer_lib.h"
 
 // ============================================================
 // Generated proto headers  (from ${PROTO_BINARY_DIR}/modules/ — via hal_protos include path)
@@ -78,6 +94,22 @@
 #include "modules/video_encode_decode.pb.h"
 #include "modules/vision_accelerator.pb.h"
 #include "modules/watchdog_and_reset.pb.h"
+#include "modules/i2c.pb.h"
+#include "modules/spi.pb.h"
+#include "modules/uart.pb.h"
+#include "modules/rtc.pb.h"
+#include "modules/can_bus.pb.h"
+#include "modules/rs485.pb.h"
+#include "modules/analog_input.pb.h"
+#include "modules/pwm_output.pb.h"
+#include "modules/sd_card.pb.h"
+#include "modules/nvme.pb.h"
+#include "modules/emmc.pb.h"
+#include "modules/battery.pb.h"
+#include "modules/bluetooth.pb.h"
+#include "modules/mipi_csi.pb.h"
+#include "modules/mipi_dsi.pb.h"
+#include "modules/accelerometer.pb.h"
 
 namespace hal {
 namespace server {
@@ -269,6 +301,86 @@ std::unique_ptr<ModuleRegistry> CreateDefaultRegistry() {
                  WatchdogAndResetTesting, 1,
                  "src/watchdog_and_reset_lib/watchdog_and_reset_lib.h",
                  hal::modules::watchdog_and_reset);
+
+    HAL_REGISTER(reg, "i2c",
+                 I2cTesting, 1,
+                 "src/i2c_lib/i2c_lib.h",
+                 hal::modules::i2c);
+
+    HAL_REGISTER(reg, "spi",
+                 SpiTesting, 1,
+                 "src/spi_lib/spi_lib.h",
+                 hal::modules::spi);
+
+    HAL_REGISTER(reg, "uart",
+                 UartTesting, 1,
+                 "src/uart_lib/uart_lib.h",
+                 hal::modules::uart);
+
+    HAL_REGISTER(reg, "rtc",
+                 RtcTesting, 1,
+                 "src/rtc_lib/rtc_lib.h",
+                 hal::modules::rtc);
+
+    HAL_REGISTER(reg, "can_bus",
+                 CanBusTesting, 1,
+                 "src/can_bus_lib/can_bus_lib.h",
+                 hal::modules::can_bus);
+
+    HAL_REGISTER(reg, "rs485",
+                 Rs485Testing, 1,
+                 "src/rs485_lib/rs485_lib.h",
+                 hal::modules::rs485);
+
+    HAL_REGISTER(reg, "analog_input",
+                 AnalogInputTesting, 1,
+                 "src/analog_input_lib/analog_input_lib.h",
+                 hal::modules::analog_input);
+
+    HAL_REGISTER(reg, "pwm_output",
+                 PwmOutputTesting, 1,
+                 "src/pwm_output_lib/pwm_output_lib.h",
+                 hal::modules::pwm_output);
+
+    HAL_REGISTER(reg, "sd_card",
+                 SdCardTesting, 1,
+                 "src/sd_card_lib/sd_card_lib.h",
+                 hal::modules::sd_card);
+
+    HAL_REGISTER(reg, "nvme",
+                 NvmeTesting, 1,
+                 "src/nvme_lib/nvme_lib.h",
+                 hal::modules::nvme);
+
+    HAL_REGISTER(reg, "emmc",
+                 EmmcTesting, 1,
+                 "src/emmc_lib/emmc_lib.h",
+                 hal::modules::emmc);
+
+    HAL_REGISTER(reg, "battery",
+                 BatteryTesting, 1,
+                 "src/battery_lib/battery_lib.h",
+                 hal::modules::battery);
+
+    HAL_REGISTER(reg, "bluetooth",
+                 BluetoothTesting, 1,
+                 "src/bluetooth_lib/bluetooth_lib.h",
+                 hal::modules::bluetooth);
+
+    HAL_REGISTER(reg, "mipi_csi",
+                 MipiCsiTesting, 1,
+                 "src/mipi_csi_lib/mipi_csi_lib.h",
+                 hal::modules::mipi_csi);
+
+    HAL_REGISTER(reg, "mipi_dsi",
+                 MipiDsiTesting, 1,
+                 "src/mipi_dsi_lib/mipi_dsi_lib.h",
+                 hal::modules::mipi_dsi);
+
+    HAL_REGISTER(reg, "accelerometer",
+                 AccelerometerTesting, 1,
+                 "src/accelerometer_lib/accelerometer_lib.h",
+                 hal::modules::accelerometer);
 
 #undef HAL_REGISTER
 

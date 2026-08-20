@@ -1,0 +1,6 @@
+add_executable(test_bluetooth main.cpp)
+target_link_libraries(test_bluetooth PRIVATE bluetooth_lib)
+target_include_directories(test_bluetooth PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_test(NAME test_bluetooth COMMAND test_bluetooth)
+set_tests_properties(test_bluetooth PROPERTIES TIMEOUT 300)
+install(TARGETS test_bluetooth RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
