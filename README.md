@@ -1,4 +1,64 @@
-# Sitara AM62x-HAL – Hardware Abstraction Library for Joshua Sitara Platform ## Overview Sitara AM62x-HAL is a comprehensive hardware abstraction and testing suite targeting the **Joshua Sitara Platform** (Sitara AM62x SoC + PRU-ICSS south-bridge). It provides a modular, extensible architecture for testing and exercising hardware interfaces and system components commonly found in automotive and industrial applications. > **Port history**: Originally developed for Sitara AM62x (Sitara AM62x).
+# Joshua-HAL
+
+## Project Summary
+
+Joshua-HAL is the C++ hardware-abstraction and validation library for the
+Joshua Sitara platform. Its implementation is organized as a large collection
+of module libraries, protobuf contracts, a server-side module registry, and
+individual test programs. The existing registry documentation describes 51
+active modules spanning compute, camera, display, audio, connectivity,
+storage, power, sensors, timing, safety, and GPIO. Each module has a protobuf
+contract under `protos/modules/`, an implementation under `src/<id>_lib/`, and
+an associated test target under `tests/<id>/`. `hal_server` exposes those
+modules through gRPC and supports single-shot, long-term, monitoring, and
+event-based execution modes.
+
+Platform-specific constants are centralized in
+`src/platform_joshua_sitara.h`, including device paths and operating limits.
+The README documents Sitara AM62x/PRU-ICSS assumptions and optional Hailo-8 or
+Coral acceleration, but those peripherals are target-dependent and are not
+equivalent to host-test coverage. CMake and Make provide native builds,
+Docker-based ARM64 cross-compilation, deployment helpers, Doxygen generation,
+clang-format, and cppcheck. The test tree is broad, with dedicated CMake
+targets for interfaces such as CPU, GPU, camera, Ethernet, GPIO, GNSS, IMU,
+PCIe, storage, thermal management, USB, watchdog, and more. The presence of a
+test executable proves a validation harness exists; it does not prove that a
+physical device is available or that every backend succeeds. This README
+therefore separates implemented code and test presence from manual hardware
+verification.
+
+## Feature Inventory
+
+| # | Name / Description | Implemented? | Test Coverage? | Manual Test |
+|---:|---|---|---|---|
+| 1 | C++ HAL library and CMake build | Implemented | Partial; many module test targets exist | [ ] Manual verification required |
+| 2 | Joshua Sitara platform constants and device paths | Implemented | Unknown | [ ] Manual verification required |
+| 3 | Protobuf contracts for common, client, HAL, and module APIs | Implemented | Partial; generated/build integration is present | [ ] Manual verification required |
+| 4 | Canonical 51-module registry | Implemented | Partial; registry and module tests exist | [ ] Manual verification required |
+| 5 | gRPC `hal_server` service | Implemented | Unknown; live RPC behavior needs integration testing | [ ] Manual verification required |
+| 6 | SINGLE_SHOT execution mode | Implemented | Partial | [ ] Manual verification required |
+| 7 | LONG_TERM execution mode | Implemented | Partial | [ ] Manual verification required |
+| 8 | MONITORING execution mode | Implemented | Partial | [ ] Manual verification required |
+| 9 | EVENT_BASED execution mode | Implemented | Partial | [ ] Manual verification required |
+| 10 | Compute, camera, display, and audio modules | Implemented | Dedicated test directories are present | [ ] Manual verification required |
+| 11 | Networking and peripheral modules | Implemented | Dedicated test directories are present | [ ] Manual verification required |
+| 12 | Storage, power, sensor, timing, and safety modules | Implemented | Dedicated test directories are present | [ ] Manual verification required |
+| 13 | Native and Docker ARM64 builds | Implemented | Build workflow documented; target build unknown | [ ] Manual verification required |
+| 14 | Doxygen, clang-format, and cppcheck integration | Implemented | Command-level coverage only | [ ] Manual verification required |
+| 15 | Optional Hailo-8 and Coral accelerator paths | Partial; documented platform paths are target-dependent | Unknown | [ ] Manual verification required |
+
+## Build and Test
+
+```bash
+make build
+make run
+make cppcheck
+make format
+```
+
+Run the module-specific CMake targets from `tests/` when hardware and required
+device nodes are available. `protos/registry/modules.yaml` is the registry
+source of truth.
 > Ported to Joshua Sitara Platform (Sitara AM62x + PRU-ICSS) — all platform-specific paths, constants,
 > and device nodes updated for the Sitara AM62x hardware. ### Target Platform | Property | Value |
 |---|---|
