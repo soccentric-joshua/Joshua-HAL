@@ -14,8 +14,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_common_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_CommonConfig_common_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_modules_2frs485_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestDetail_modules_2frs485_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_common_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_TestResult_common_2eproto;
 namespace hal {
 namespace modules {
 namespace rs485 {
@@ -27,10 +26,6 @@ class ResultDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Result> _instance;
 } _Result_default_instance_;
-class TestDetailDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<TestDetail> _instance;
-} _TestDetail_default_instance_;
 }  // namespace rs485
 }  // namespace modules
 }  // namespace hal
@@ -45,9 +40,8 @@ static void InitDefaultsscc_info_Config_modules_2frs485_2eproto() {
   ::hal::modules::rs485::Config::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Config_modules_2frs485_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Config_modules_2frs485_2eproto}, {
-      &scc_info_CommonConfig_common_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Config_modules_2frs485_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Config_modules_2frs485_2eproto}, {}};
 
 static void InitDefaultsscc_info_Result_modules_2frs485_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -62,23 +56,9 @@ static void InitDefaultsscc_info_Result_modules_2frs485_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Result_modules_2frs485_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_Result_modules_2frs485_2eproto}, {
-      &scc_info_TestDetail_modules_2frs485_2eproto.base,}};
+      &scc_info_TestResult_common_2eproto.base,}};
 
-static void InitDefaultsscc_info_TestDetail_modules_2frs485_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::hal::modules::rs485::_TestDetail_default_instance_;
-    new (ptr) ::hal::modules::rs485::TestDetail();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::hal::modules::rs485::TestDetail::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TestDetail_modules_2frs485_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_TestDetail_modules_2frs485_2eproto}, {}};
-
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_modules_2frs485_2eproto[3];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_modules_2frs485_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_modules_2frs485_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_modules_2frs485_2eproto = nullptr;
 
@@ -88,64 +68,44 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_modules_2frs485_2eproto::offse
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Config, common_),
   PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Config, test_names_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Result, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Result, status_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Result, message_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Result, details_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, name_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, passed_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, message_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, value_),
-  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::TestDetail, unit_),
+  PROTOBUF_FIELD_OFFSET(::hal::modules::rs485::Result, results_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::hal::modules::rs485::Config)},
-  { 7, -1, sizeof(::hal::modules::rs485::Result)},
-  { 15, -1, sizeof(::hal::modules::rs485::TestDetail)},
+  { 6, -1, sizeof(::hal::modules::rs485::Result)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hal::modules::rs485::_Config_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hal::modules::rs485::_Result_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hal::modules::rs485::_TestDetail_default_instance_),
 };
 
 const char descriptor_table_protodef_modules_2frs485_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\023modules/rs485.proto\022\021hal.modules.rs485"
-  "\032\014common.proto\"F\n\006Config\022(\n\006common\030\001 \001(\013"
-  "2\030.hal.common.CommonConfig\022\022\n\ntest_names"
-  "\030\002 \003(\t\"q\n\006Result\022&\n\006status\030\001 \001(\0162\026.hal.c"
-  "ommon.TestStatus\022\017\n\007message\030\002 \001(\t\022.\n\007det"
-  "ails\030\003 \003(\0132\035.hal.modules.rs485.TestDetai"
-  "l\"X\n\nTestDetail\022\014\n\004name\030\001 \001(\t\022\016\n\006passed\030"
-  "\002 \001(\010\022\017\n\007message\030\003 \001(\t\022\r\n\005value\030\004 \001(\001\022\014\n"
-  "\004unit\030\005 \001(\tb\006proto3"
+  "\032\014common.proto\"\034\n\006Config\022\022\n\ntest_names\030\001"
+  " \003(\t\"E\n\006Result\022\'\n\007results\030\002 \003(\0132\026.hal.co"
+  "mmon.TestResultJ\004\010\001\020\002R\014test_resultsb\006pro"
+  "to3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_modules_2frs485_2eproto_deps[1] = {
   &::descriptor_table_common_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_modules_2frs485_2eproto_sccs[3] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_modules_2frs485_2eproto_sccs[2] = {
   &scc_info_Config_modules_2frs485_2eproto.base,
   &scc_info_Result_modules_2frs485_2eproto.base,
-  &scc_info_TestDetail_modules_2frs485_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_modules_2frs485_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_modules_2frs485_2eproto = {
-  false, false, descriptor_table_protodef_modules_2frs485_2eproto, "modules/rs485.proto", 339,
-  &descriptor_table_modules_2frs485_2eproto_once, descriptor_table_modules_2frs485_2eproto_sccs, descriptor_table_modules_2frs485_2eproto_deps, 3, 1,
+  false, false, descriptor_table_protodef_modules_2frs485_2eproto, "modules/rs485.proto", 163,
+  &descriptor_table_modules_2frs485_2eproto_once, descriptor_table_modules_2frs485_2eproto_sccs, descriptor_table_modules_2frs485_2eproto_deps, 2, 1,
   schemas, file_default_instances, TableStruct_modules_2frs485_2eproto::offsets,
-  file_level_metadata_modules_2frs485_2eproto, 3, file_level_enum_descriptors_modules_2frs485_2eproto, file_level_service_descriptors_modules_2frs485_2eproto,
+  file_level_metadata_modules_2frs485_2eproto, 2, file_level_enum_descriptors_modules_2frs485_2eproto, file_level_service_descriptors_modules_2frs485_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -157,24 +117,11 @@ namespace rs485 {
 // ===================================================================
 
 void Config::InitAsDefaultInstance() {
-  ::hal::modules::rs485::_Config_default_instance_._instance.get_mutable()->common_ = const_cast< ::hal::common::CommonConfig*>(
-      ::hal::common::CommonConfig::internal_default_instance());
 }
 class Config::_Internal {
  public:
-  static const ::hal::common::CommonConfig& common(const Config* msg);
 };
 
-const ::hal::common::CommonConfig&
-Config::_Internal::common(const Config* msg) {
-  return *msg->common_;
-}
-void Config::clear_common() {
-  if (GetArena() == nullptr && common_ != nullptr) {
-    delete common_;
-  }
-  common_ = nullptr;
-}
 Config::Config(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   test_names_(arena) {
@@ -186,17 +133,11 @@ Config::Config(const Config& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       test_names_(from.test_names_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_common()) {
-    common_ = new ::hal::common::CommonConfig(*from.common_);
-  } else {
-    common_ = nullptr;
-  }
   // @@protoc_insertion_point(copy_constructor:hal.modules.rs485.Config)
 }
 
 void Config::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Config_modules_2frs485_2eproto.base);
-  common_ = nullptr;
 }
 
 Config::~Config() {
@@ -207,7 +148,6 @@ Config::~Config() {
 
 void Config::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  if (this != internal_default_instance()) delete common_;
 }
 
 void Config::ArenaDtor(void* object) {
@@ -232,10 +172,6 @@ void Config::Clear() {
   (void) cached_has_bits;
 
   test_names_.Clear();
-  if (GetArena() == nullptr && common_ != nullptr) {
-    delete common_;
-  }
-  common_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -247,16 +183,9 @@ const char* Config::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .hal.common.CommonConfig common = 1;
+      // repeated string test_names = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_common(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated string test_names = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -265,7 +194,7 @@ const char* Config::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
             CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "hal.modules.rs485.Config.test_names"));
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -296,22 +225,14 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .hal.common.CommonConfig common = 1;
-  if (this->has_common()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        1, _Internal::common(this), target, stream);
-  }
-
-  // repeated string test_names = 2;
+  // repeated string test_names = 1;
   for (int i = 0, n = this->_internal_test_names_size(); i < n; i++) {
     const auto& s = this->_internal_test_names(i);
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       s.data(), static_cast<int>(s.length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "hal.modules.rs485.Config.test_names");
-    target = stream->WriteString(2, s, target);
+    target = stream->WriteString(1, s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -330,19 +251,12 @@ size_t Config::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string test_names = 2;
+  // repeated string test_names = 1;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(test_names_.size());
   for (int i = 0, n = test_names_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
       test_names_.Get(i));
-  }
-
-  // .hal.common.CommonConfig common = 1;
-  if (this->has_common()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *common_);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -377,9 +291,6 @@ void Config::MergeFrom(const Config& from) {
   (void) cached_has_bits;
 
   test_names_.MergeFrom(from.test_names_);
-  if (from.has_common()) {
-    _internal_mutable_common()->::hal::common::CommonConfig::MergeFrom(from._internal_common());
-  }
 }
 
 void Config::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -404,7 +315,6 @@ void Config::InternalSwap(Config* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   test_names_.InternalSwap(&other->test_names_);
-  swap(common_, other->common_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Config::GetMetadata() const {
@@ -420,30 +330,25 @@ class Result::_Internal {
  public:
 };
 
+void Result::clear_results() {
+  results_.Clear();
+}
 Result::Result(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  details_(arena) {
+  results_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:hal.modules.rs485.Result)
 }
 Result::Result(const Result& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      details_(from.details_) {
+      results_(from.results_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_message().empty()) {
-    message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
-      GetArena());
-  }
-  status_ = from.status_;
   // @@protoc_insertion_point(copy_constructor:hal.modules.rs485.Result)
 }
 
 void Result::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Result_modules_2frs485_2eproto.base);
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  status_ = 0;
 }
 
 Result::~Result() {
@@ -454,7 +359,6 @@ Result::~Result() {
 
 void Result::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  message_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void Result::ArenaDtor(void* object) {
@@ -478,9 +382,7 @@ void Result::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  details_.Clear();
-  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  status_ = 0;
+  results_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -492,33 +394,16 @@ const char* Result::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .hal.common.TestStatus status = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_set_status(static_cast<::hal::common::TestStatus>(val));
-        } else goto handle_unusual;
-        continue;
-      // string message = 2;
+      // repeated .hal.common.TestResult results = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_message();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "hal.modules.rs485.Result.message"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated .hal.modules.rs485.TestDetail details = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_details(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_results(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -549,29 +434,12 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .hal.common.TestStatus status = 1;
-  if (this->status() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_status(), target);
-  }
-
-  // string message = 2;
-  if (this->message().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "hal.modules.rs485.Result.message");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_message(), target);
-  }
-
-  // repeated .hal.modules.rs485.TestDetail details = 3;
+  // repeated .hal.common.TestResult results = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_details_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_results_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(3, this->_internal_details(i), target, stream);
+      InternalWriteMessage(2, this->_internal_results(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -590,24 +458,11 @@ size_t Result::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .hal.modules.rs485.TestDetail details = 3;
-  total_size += 1UL * this->_internal_details_size();
-  for (const auto& msg : this->details_) {
+  // repeated .hal.common.TestResult results = 2;
+  total_size += 1UL * this->_internal_results_size();
+  for (const auto& msg : this->results_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
-  }
-
-  // string message = 2;
-  if (this->message().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_message());
-  }
-
-  // .hal.common.TestStatus status = 1;
-  if (this->status() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_status());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -641,13 +496,7 @@ void Result::MergeFrom(const Result& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  details_.MergeFrom(from.details_);
-  if (from.message().size() > 0) {
-    _internal_set_message(from._internal_message());
-  }
-  if (from.status() != 0) {
-    _internal_set_status(from._internal_status());
-  }
+  results_.MergeFrom(from.results_);
 }
 
 void Result::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -671,354 +520,10 @@ bool Result::IsInitialized() const {
 void Result::InternalSwap(Result* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  details_.InternalSwap(&other->details_);
-  message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(status_, other->status_);
+  results_.InternalSwap(&other->results_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Result::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
-
-// ===================================================================
-
-void TestDetail::InitAsDefaultInstance() {
-}
-class TestDetail::_Internal {
- public:
-};
-
-TestDetail::TestDetail(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:hal.modules.rs485.TestDetail)
-}
-TestDetail::TestDetail(const TestDetail& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_name().empty()) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
-      GetArena());
-  }
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_message().empty()) {
-    message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
-      GetArena());
-  }
-  unit_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_unit().empty()) {
-    unit_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_unit(),
-      GetArena());
-  }
-  ::memcpy(&value_, &from.value_,
-    static_cast<size_t>(reinterpret_cast<char*>(&passed_) -
-    reinterpret_cast<char*>(&value_)) + sizeof(passed_));
-  // @@protoc_insertion_point(copy_constructor:hal.modules.rs485.TestDetail)
-}
-
-void TestDetail::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_TestDetail_modules_2frs485_2eproto.base);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  unit_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&value_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&passed_) -
-      reinterpret_cast<char*>(&value_)) + sizeof(passed_));
-}
-
-TestDetail::~TestDetail() {
-  // @@protoc_insertion_point(destructor:hal.modules.rs485.TestDetail)
-  SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-void TestDetail::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
-  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  message_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  unit_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-void TestDetail::ArenaDtor(void* object) {
-  TestDetail* _this = reinterpret_cast< TestDetail* >(object);
-  (void)_this;
-}
-void TestDetail::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
-void TestDetail::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const TestDetail& TestDetail::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_TestDetail_modules_2frs485_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void TestDetail::Clear() {
-// @@protoc_insertion_point(message_clear_start:hal.modules.rs485.TestDetail)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  unit_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  ::memset(&value_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&passed_) -
-      reinterpret_cast<char*>(&value_)) + sizeof(passed_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* TestDetail::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // string name = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_name();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "hal.modules.rs485.TestDetail.name"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // bool passed = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          passed_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string message = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          auto str = _internal_mutable_message();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "hal.modules.rs485.TestDetail.message"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // double value = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 33)) {
-          value_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else goto handle_unusual;
-        continue;
-      // string unit = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          auto str = _internal_mutable_unit();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "hal.modules.rs485.TestDetail.unit"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* TestDetail::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:hal.modules.rs485.TestDetail)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "hal.modules.rs485.TestDetail.name");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
-  }
-
-  // bool passed = 2;
-  if (this->passed() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_passed(), target);
-  }
-
-  // string message = 3;
-  if (this->message().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "hal.modules.rs485.TestDetail.message");
-    target = stream->WriteStringMaybeAliased(
-        3, this->_internal_message(), target);
-  }
-
-  // double value = 4;
-  if (!(this->value() <= 0 && this->value() >= 0)) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteDoubleToArray(4, this->_internal_value(), target);
-  }
-
-  // string unit = 5;
-  if (this->unit().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_unit().data(), static_cast<int>(this->_internal_unit().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "hal.modules.rs485.TestDetail.unit");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_unit(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:hal.modules.rs485.TestDetail)
-  return target;
-}
-
-size_t TestDetail::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:hal.modules.rs485.TestDetail)
-  size_t total_size = 0;
-
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
-  }
-
-  // string message = 3;
-  if (this->message().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_message());
-  }
-
-  // string unit = 5;
-  if (this->unit().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_unit());
-  }
-
-  // double value = 4;
-  if (!(this->value() <= 0 && this->value() >= 0)) {
-    total_size += 1 + 8;
-  }
-
-  // bool passed = 2;
-  if (this->passed() != 0) {
-    total_size += 1 + 1;
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void TestDetail::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:hal.modules.rs485.TestDetail)
-  GOOGLE_DCHECK_NE(&from, this);
-  const TestDetail* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<TestDetail>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:hal.modules.rs485.TestDetail)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:hal.modules.rs485.TestDetail)
-    MergeFrom(*source);
-  }
-}
-
-void TestDetail::MergeFrom(const TestDetail& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:hal.modules.rs485.TestDetail)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.name().size() > 0) {
-    _internal_set_name(from._internal_name());
-  }
-  if (from.message().size() > 0) {
-    _internal_set_message(from._internal_message());
-  }
-  if (from.unit().size() > 0) {
-    _internal_set_unit(from._internal_unit());
-  }
-  if (!(from.value() <= 0 && from.value() >= 0)) {
-    _internal_set_value(from._internal_value());
-  }
-  if (from.passed() != 0) {
-    _internal_set_passed(from._internal_passed());
-  }
-}
-
-void TestDetail::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:hal.modules.rs485.TestDetail)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void TestDetail::CopyFrom(const TestDetail& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:hal.modules.rs485.TestDetail)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool TestDetail::IsInitialized() const {
-  return true;
-}
-
-void TestDetail::InternalSwap(TestDetail* other) {
-  using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  unit_.Swap(&other->unit_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(TestDetail, passed_)
-      + sizeof(TestDetail::passed_)
-      - PROTOBUF_FIELD_OFFSET(TestDetail, value_)>(
-          reinterpret_cast<char*>(&value_),
-          reinterpret_cast<char*>(&other->value_));
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata TestDetail::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -1033,9 +538,6 @@ template<> PROTOBUF_NOINLINE ::hal::modules::rs485::Config* Arena::CreateMaybeMe
 }
 template<> PROTOBUF_NOINLINE ::hal::modules::rs485::Result* Arena::CreateMaybeMessage< ::hal::modules::rs485::Result >(Arena* arena) {
   return Arena::CreateMessageInternal< ::hal::modules::rs485::Result >(arena);
-}
-template<> PROTOBUF_NOINLINE ::hal::modules::rs485::TestDetail* Arena::CreateMaybeMessage< ::hal::modules::rs485::TestDetail >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::hal::modules::rs485::TestDetail >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -19,7 +19,7 @@ set(CPACK_DEBIAN_FILE_NAME "DEB-DEFAULT")
 set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "arm64")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libstdc++6 (>= 10), libgcc-s1")
 set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Joshua HAL provides a C++17 hardware abstraction layer for the
-Joshua Sitara Platform (Sitara AM62x/AM64x / PRU-ICSS) exposing 35 hardware modules via a
+Joshua Sitara Platform (Sitara AM62x / PRU-ICSS) exposing 51 hardware modules via a
 canonical API and a gRPC/Protobuf service interface.")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Joshua <maintainer@Joshua.example.com>")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
