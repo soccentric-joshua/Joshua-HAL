@@ -1,7 +1,7 @@
 /**
  * @file communication_interface_lib.cpp
  * @brief Implementation file for CommunicationInterfaceTesting class
- *        Targeted at Joshua Sitara Platform platform.
+ *        Targeted at Joshua Sitara platform.
  * @author sandesh ghimire
  * @copyright (C) Soccentric LLC */
 

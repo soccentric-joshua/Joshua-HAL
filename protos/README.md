@@ -1,4 +1,4 @@
-# HAL Proto Layer Protocol Buffer + gRPC definitions for the Acadia HAL Independent Validation & Verification suite. --- ## Directory layout ```
+# HAL Proto Layer Protocol Buffer + gRPC definitions for the Joshua HAL Independent Validation & Verification suite. --- ## Directory layout ```
 protos/
 ├── common.proto # Shared types (ExecutionMode, TestStatus, ResultEnvelope, …)
 ├── hal_service.proto # Single stable gRPC service definition (never changes on module add/remove)

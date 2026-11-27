@@ -145,7 +145,7 @@ static std::string vedGetModel()
     return vedReadFile(JOSHUA_SITARA_DT_MODEL_PATH);
 }
 
-/** Confirm we are running on a Joshua Sitara Platform platform. */
+/** Confirm we are running on a Joshua Sitara platform. */
 static bool isPi5Platform()
 {
     std::string model = vedGetModel();

@@ -7,7 +7,7 @@ build:
 	docker buildx build --platform linux/arm64 --load --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) -t $(IMAGE_NAME) .
 
 run:
-	# No --gpus flag: Sitara AM62x has Sitara AM62x (not CUDA)
+	# No --gpus flag: Sitara AM62x has no CUDA-capable GPU
 	docker run -it --rm --hostname "Sitara AM62x" $(IMAGE_NAME)
 
 clean:
